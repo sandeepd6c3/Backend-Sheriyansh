@@ -1,19 +1,7 @@
-const { log } = require('console');
-const express = require('express')
-
-const app = express();
+const app = require("./src/app");
 
 
 
-app.get("/" ,(req,res)=>{
-    res.send("Server start ho gya ! hui hui ")
-})
-app.get("/about" ,(req,res)=>{
-    res.send("Ye hai about page ! ")
-})
-
-
-app.listen(3000,()=>{
-console.log("Server running !");
-
+app.listen(3000, ()=>{
+    console.log("Server Start at port 3000");    
 })

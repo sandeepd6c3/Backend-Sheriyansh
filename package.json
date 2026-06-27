@@ -6,10 +6,18 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandeepd6c3/Backend-Sheriyansh.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sandeepd6c3/Backend-Sheriyansh/issues"
+  },
+  "homepage": "https://github.com/sandeepd6c3/Backend-Sheriyansh#readme",
   "dependencies": {
     "express": "^5.2.1"
   }
