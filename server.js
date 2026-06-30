@@ -1,9 +1,11 @@
-// Import the Express app from the src folder
-const app = require("./src/app");
+// server.js
+// Entry point for the notes API server.
+const app = require('./src/app');
 
+// Application port.
+const PORT = 3000;
 
-
-// Start the server on port 3000
-app.listen(3000, () => {
-    console.log("Server Start at port 3000");
+// Start the server.
+app.listen(PORT, () => {
+    console.log(`Server started at port ${PORT}`);
 });
