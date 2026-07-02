@@ -19,6 +19,9 @@
   },
   "homepage": "https://github.com/sandeepd6c3/Backend-Sheriyansh#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "chalk": "^4.1.2",
+    "express": "^5.2.1",
+    "mongoose": "^9.7.3",
+    "nodemon": "^3.1.14"
   }
 }

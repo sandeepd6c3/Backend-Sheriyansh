@@ -1,11 +1,14 @@
-// server.js
-// Entry point for the notes API server.
-const app = require('./src/app');
+const app = require('./src/app')
+const dbConnect = require('./src/db/db.js')
+const dns = require('dns');
 
-// Application port.
-const PORT = 3000;
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
-// Start the server.
-app.listen(PORT, () => {
-    console.log(`Server started at port ${PORT}`);
-});
+
+
+dbConnect();
+
+app.listen(3000, (req,res)=>{
+    console.log("Server is running on port 3000");
+    
+})
