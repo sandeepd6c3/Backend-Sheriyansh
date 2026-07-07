@@ -7,50 +7,28 @@ const notes = [];
 
 app.use(express.json());
 
-app.post('/notes',(req,res)=>{
-    console.log(req.body);
-    
-    notes.push(req.body);
+app.post("/notes", async (req, res) => {
+    const data = req.body;
+
+    await notemodel.create({
+        title: data.title,
+        description: data.description
+    })
 
     res.status(201).json({
-        message  : "Note created successfully !"
+        message: "Note created "
     })
-    
 })
 
-app.get('/notes',(req,res)=>{
-   
+app.get("/notes", async (req, res) => {
+
+    const notes = await notemodel.find()
 
     res.status(200).json({
-        message: "Note mil gya !",
+        message: "Note fetch successfully !",
         notes: notes
     })
-})
 
-app.delete('/notes/:index', (req,res)=>{
-
-    const index = req.params.index;
-
-    delete notes[index]
-
-    res.status(200).json({
-        message: "Note deleted successfully !"
-    })
-
-})
-
-app.patch('/notes/:index',(req,res)=>{
-
-    const index = req.params.index
-    const name = req.body.name
-    const work = req.body.work
-
-    notes[index].name = name;
-    notes[index].work = work
-
-    res.status(200).json({
-        message: "Note updated successfully ! "         
-    })
 
 })
 
