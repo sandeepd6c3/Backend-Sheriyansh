@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState ,useEffect} from 'react'
+import axios from 'axios'
 
 const Feed = () => {
-  const [posts] = useState([
+  const [posts , setPosts] = useState([
     {
       id: 1,
       image:
@@ -16,46 +17,18 @@ const Feed = () => {
       caption: 'Morning coffee and code sessions.',
       author: 'Mira'
     },
-    {
-      id: 3,
-      image:
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.0.3',
-      caption: 'Capturing city lights after dark.',
-      author: 'Sam'
-    }
-    ,
-    {
-      id: 3,
-      image:
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.0.3',
-      caption: 'Capturing city lights after dark.',
-      author: 'Sam'
-    }
-    ,
-    {
-      id: 3,
-      image:
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.0.3',
-      caption: 'Capturing city lights after dark.',
-      author: 'Sam'
-    }
-    ,
-    {
-      id: 3,
-      image:
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.0.3',
-      caption: 'Capturing city lights after dark.',
-      author: 'Sam'
-    }
-    ,
-    {
-      id: 3,
-      image:
-        'https://images.unsplash.com/photo-1517816743773-6e0fd518b4a6?w=900&auto=format&fit=crop&q=80&ixlib=rb-4.0.3',
-      caption: 'Capturing city lights after dark.',
-      author: 'Sam'
-    }
+    
   ])
+
+
+  useEffect(()=>{
+    axios.get("http://localhost:3000/posts")
+    .then((res)=>{
+
+     setPosts(res.data.posts)
+      
+    })
+  },[])
 
   return (
     <div className='min-h-screen bg-slate-950 text-slate-100 py-12 px-4 sm:px-6 lg:px-8'>
