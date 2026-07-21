@@ -5,7 +5,14 @@ const router = express.Router();
 
 router.post('/register', authController.register)
 
- 
+ router.get('/test', (req, res) => {
+    console.log('cookies', req.cookies);
 
+    res.json({
+        message: 'Test route',
+        cookies: req.cookies
+    })
+ })
+ 
 
 module.exports = router
