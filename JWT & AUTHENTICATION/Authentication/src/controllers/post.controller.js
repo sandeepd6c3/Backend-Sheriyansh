@@ -25,7 +25,7 @@ router.post("/create", (req,res)=>{
 
     res.send("Post created successfully")
    });
-});
+});  
 
 module.exports = router;
  
