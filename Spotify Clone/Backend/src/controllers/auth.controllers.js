@@ -8,12 +8,20 @@ const bcrypt = require('bcryptjs');
 async function registerUser(req, res) {
 
     const { username, email, password, role = 'user' } = req.body;
+    const normalizedUsername = username?.trim();
+    const normalizedEmail = email?.trim().toLowerCase();
+
+    if (!normalizedUsername || !normalizedEmail || !password) {
+        return res.status(400).json({
+            message: "Username, email, and password are required"
+        });
+    }
 
     // Check user already exists or not
     const isUserAlreadyExist = await userModel.findOne({
         $or: [
-            { username },
-            { email }
+            { username: normalizedUsername },
+            { email: normalizedEmail }
         ]
     });
 
@@ -30,8 +38,8 @@ async function registerUser(req, res) {
 
     // Create new user
     const newUser = await userModel.create({
-        username,
-        email,
+        username: normalizedUsername,
+        email: normalizedEmail,
         password: hash,
         role
     });
@@ -43,7 +51,7 @@ async function registerUser(req, res) {
             id: newUser._id,
             role: newUser.role
         },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET || 'dev-secret'
     );
 
 
@@ -71,16 +79,21 @@ async function registerUser(req, res) {
 async function loginUser(req, res) {
 
     const { username, email, password } = req.body;
+    const loginIdentifier = username?.trim() || email?.trim().toLowerCase();
 
+    if (!loginIdentifier || !password) {
+        return res.status(400).json({
+            message: "Username/email and password are required"
+        });
+    }
 
     // Find user using username OR email
     const user = await userModel.findOne({
         $or: [
-            { email },
-            { username }
+            { email: loginIdentifier },
+            { username: loginIdentifier }
         ]
     });
-
 
     // User doesn't exist
     if (!user) {
@@ -88,7 +101,6 @@ async function loginUser(req, res) {
             message: "Invalid username or password"
         });
     }
-
 
     // Compare entered password with hashed password
     const isPasswordValid = await bcrypt.compare(
@@ -113,7 +125,7 @@ async function loginUser(req, res) {
             email: user.email,
             role: user.role
         },
-        process.env.JWT_SECRET
+        process.env.JWT_SECRET || 'dev-secret'
     );
 
 
